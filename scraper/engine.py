@@ -10,9 +10,12 @@ class Engine:
     def fetch(self) -> pd.DataFrame:
         logger.debug(f"Attempting to fetch content from {self.URL}.")
         content = self.get_content()
-        logger.debug(f"Successfully fetched content from {self.URL}. Now parsing the content.")
+        logger.debug(
+            f"Successfully fetched content from {self.URL}. Now parsing the content."
+        )
         df = self.parse_html(content)
         logger.info(f"Parsed content from {self.URL}. Extracted {len(df)} rows.")
+        logger.debug(f"\n{df}")
         return df
 
     def get_content(self):
@@ -28,11 +31,13 @@ class Engine:
         try:
             dfs = pd.read_html(content)
         except Exception as e:
-            logger.error(e)
+            logger.error(f"Error reading HTML via pandas. Error: {e}")
             raise e
-        
+
         if len(dfs):
-            logger.debug(f"Successfully parsed content from {self.URL}. Extracted {len(dfs[0])} rows.")
+            logger.debug(
+                f"Successfully parsed content from {self.URL}. Extracted {len(dfs[0])} rows."  # noqa: E501
+            )
             return dfs[0]
         else:
             raise ValueError(f"No data found when parsing content from {self.URL}.")
