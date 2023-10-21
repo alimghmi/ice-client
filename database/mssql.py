@@ -1,3 +1,4 @@
+import time
 import pandas as pd
 from sqlalchemy import exc
 
@@ -44,6 +45,7 @@ class PandasSQLDataInserter(DataInserter):
                 logger.error(
                     f"Failed to insert data. Attempt {i + 1} of {self.max_retries}. Error: {e}"  # noqa: E501
                 )
+                time.sleep(i + 1)
 
         logger.error("Max retries reached. Data insertion failed.")
         raise exc.SQLAlchemyError("Data insertion failed.")
