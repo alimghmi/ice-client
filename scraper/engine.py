@@ -17,8 +17,9 @@ class Engine:
             f"Successfully fetched content from {self.url}. Now parsing the content."
         )
         df = self.parse_html(content)
-        logger.info(f"Parsed content from {self.url}. Extracted {len(df)} rows.")
         logger.debug(f"\n{df}")
+        self.validate_data(df)
+        logger.info(f"Parsed content from {self.url}. Extracted {len(df)} rows.")
         return df
 
     def get_content(self):
@@ -34,7 +35,7 @@ class Engine:
         try:
             dfs = pd.read_html(content)
         except Exception as e:
-            logger.error(f"Error reading HTML via pandas. Error: {e}")
+            logger.error(f"Error parsing HTML via pandas. Error: {e}")
             raise e
 
         if len(dfs):
@@ -44,3 +45,10 @@ class Engine:
             return dfs[0]
         else:
             raise ValueError(f"No data found when parsing content from {self.url}.")
+
+    def validate_data(self, df: pd.DataFrame) -> None:
+        if df["Clearing Date"].str.contains("No data found").any() or not len(df):
+            logger.error(f"Data validation failed")
+            raise ValueError("No price data provided by the provider as of now.")
+
+        logger.debug("Data validation succeeded.")
