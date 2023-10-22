@@ -48,7 +48,7 @@ class Engine:
 
     def validate_data(self, df: pd.DataFrame) -> None:
         if df["Clearing Date"].str.contains("No data found").any() or not len(df):
-            logger.error(f"Data validation failed")
+            logger.error("Data validation failed")
             raise ValueError("No price data provided by the provider as of now.")
 
         logger.debug("Data validation succeeded.")
