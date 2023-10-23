@@ -15,11 +15,11 @@ class Engine:
         if not content:
             content = self.get_content()
             logger.debug(
-                f"Successfully fetched content from {self.url}. Now parsing the content."
+                f"Successfully fetched content from {self.url}. Now parsing the content."  # noqa: E501
             )
         else:
             logger.debug(
-                f"Successfully loaded the content from the user provided argument. Now parsing the content."
+                "Successfully loaded the content from the user provided argument. Now parsing the content."  # noqa: E501
             )
 
         df = self.parse_html(content)
