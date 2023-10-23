@@ -16,7 +16,7 @@ class Agent:
         "Doc Clause": "doc_clause",
         "Fixed Rate": "fixed_rate",
         "Maturity Date": "maturity_date",
-        "EOD Price": "price"
+        "EOD Price": "price",
     }
 
     def __init__(self, df: pd.DataFrame) -> None:
@@ -66,12 +66,21 @@ class Agent:
         except Exception as e:
             logger.error(f"Failed to rename columns. Error: {e}")
             raise
-        
+
     def brakedown_instrument_name(self):
         try:
-            df_split = self.dataframe['Instrument Name'].str.split('.', n=5, expand=True)
+            df_split = self.dataframe["Instrument Name"].str.split(
+                ".", n=5, expand=True
+            )
             print(df_split)
-            df_split.columns = ['Ticker', 'Tier', 'Currency', 'Doc Clause', 'Fixed Rate', 'Maturity Date']
+            df_split.columns = [
+                "Ticker",
+                "Tier",
+                "Currency",
+                "Doc Clause",
+                "Fixed Rate",
+                "Maturity Date",
+            ]
             self.dataframe = pd.concat([self.dataframe, df_split], axis=1)
         except Exception as e:
             logger.error(f"Failed to brake down instrument name. Error: {e}")
