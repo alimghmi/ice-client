@@ -10,7 +10,7 @@ class Engine:
         self.url = url
         self.request = Request(max_retries=max_retries, backoff_factor=backoff_factor)
 
-    def fetch(self, content=None) -> pd.DataFrame:
+    def fetch(self, content: str = None) -> pd.DataFrame:
         logger.debug(f"Attempting to fetch content from {self.url}.")
         if not content:
             content = self.get_content()

@@ -41,7 +41,7 @@ class Agent:
         logger.debug(f"\n{self.dataframe}")
         return self.dataframe
 
-    def parse_date(self):
+    def parse_date(self) -> None:
         try:
             self.dataframe["Clearing Date"] = pd.to_datetime(
                 self.dataframe["Clearing Date"], format="%Y-%m-%d"
@@ -53,26 +53,26 @@ class Agent:
             logger.error(f"Failed to parse dates. Error: {e}")
             raise
 
-    def add_timestamp(self):
+    def add_timestamp(self) -> None:
         try:
             self.dataframe["timestamp_created_utc"] = datetime.datetime.utcnow()
         except Exception as e:
             logger.error(f"Failed to add timestamps. Error: {e}")
             raise
 
-    def rename_columns(self):
+    def rename_columns(self) -> None:
         try:
             self.dataframe.rename(columns=self.COLUMNS_NAME, inplace=True)
         except Exception as e:
             logger.error(f"Failed to rename columns. Error: {e}")
             raise
 
-    def brakedown_instrument_name(self):
+    def brakedown_instrument_name(self) -> None:
         try:
             df_split = self.dataframe["Instrument Name"].str.split(
                 ".", n=5, expand=True
             )
-            print(df_split)
+            logger.debug(f"\n{df_split}")
             df_split.columns = [
                 "Ticker",
                 "Tier",
