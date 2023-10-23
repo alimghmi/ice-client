@@ -11,7 +11,7 @@ class DatabaseConnection:
 
     def connect(self):
         """Establish a connection."""
-        self.engine = create_engine(self.connection_string)
+        self.engine = create_engine(self.connection_string, fast_executemany=True)
 
     def disconnect(self):
         """Close the connection."""
