@@ -10,12 +10,18 @@ class Engine:
         self.url = url
         self.request = Request(max_retries=max_retries, backoff_factor=backoff_factor)
 
-    def fetch(self) -> pd.DataFrame:
+    def fetch(self, content=None) -> pd.DataFrame:
         logger.debug(f"Attempting to fetch content from {self.url}.")
-        content = self.get_content()
-        logger.debug(
-            f"Successfully fetched content from {self.url}. Now parsing the content."
-        )
+        if not content:
+            content = self.get_content()
+            logger.debug(
+                f"Successfully fetched content from {self.url}. Now parsing the content."
+            )
+        else:
+            logger.debug(
+                f"Successfully loaded the content from the user provided argument. Now parsing the content."
+            )
+
         df = self.parse_html(content)
         logger.debug(f"\n{df}")
         self.validate_data(df)
