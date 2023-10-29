@@ -1,5 +1,5 @@
 from config import settings
-from database.mssql import MSSQLDatabaseConnection, PandasSQLDataInserter
+from database import MSSQLDatabaseConnection, PandasSQLDataInserter
 
 
 def create_inserter_objects(*args, **kwargs) -> PandasSQLDataInserter:

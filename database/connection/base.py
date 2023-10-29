@@ -1,4 +1,3 @@
-import pandas as pd
 from sqlalchemy import create_engine
 
 
@@ -18,13 +17,3 @@ class DatabaseConnection:
         if self.engine:
             self.engine.dispose()
             self.engine = None
-
-
-class DataInserter:
-    """Abstracts the data insertion to a database."""
-
-    def __init__(self, db_connection: DatabaseConnection):
-        self.db_connection = db_connection
-
-    def insert(self, df: pd.DataFrame, table_name: str):
-        raise NotImplementedError("Subclasses must implement this method.")
