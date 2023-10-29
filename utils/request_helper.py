@@ -6,7 +6,7 @@ from config import logger
 
 
 class Request:
-    def __init__(self, max_retries, backoff_factor) -> None:
+    def __init__(self, max_retries: int, backoff_factor: int) -> None:
         self.max_retries = max_retries
         self.backoff_factor = backoff_factor
 

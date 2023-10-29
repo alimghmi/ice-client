@@ -6,7 +6,7 @@ from utils import Request
 
 
 class Engine:
-    def __init__(self, url, max_retries, backoff_factor) -> None:
+    def __init__(self, url: str, max_retries: int, backoff_factor: int) -> None:
         self.url = url
         self.request = Request(max_retries=max_retries, backoff_factor=backoff_factor)
 
@@ -28,7 +28,7 @@ class Engine:
         logger.info(f"Parsed content from {self.url}. Extracted {len(df)} rows.")
         return df
 
-    def get_content(self):
+    def get_content(self) -> str:
         try:
             r = self.request.request("GET", self.url)
             r.raise_for_status()
