@@ -1,4 +1,4 @@
-# ICE Data Scraper with Docker 🚀
+# ICE Data Scraper with Docker
 
 Scrape, transform, and insert ICE (Intercontinental Exchange) settlement prices into an MSSQL database, with Docker support for easy deployment and scaling.
 
@@ -12,7 +12,7 @@ Scrape, transform, and insert ICE (Intercontinental Exchange) settlement prices 
 - **Robust Error Handling:** Multi-retry mechanisms and comprehensive logging.
 
 
-## 🚀 Getting Started:
+## Getting Started:
 
 ### Environment Setup
 
@@ -58,6 +58,6 @@ Scrape, transform, and insert ICE (Intercontinental Exchange) settlement prices 
    docker run --env-file .env ice-data-scraper
    ```
 
-## 🙌 Contribution
+## Contribution
 
 Feel free to fork the repository, make changes, and open a pull request. All contributions are welcomed!
